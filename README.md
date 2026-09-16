@@ -4,7 +4,6 @@
 
 *Live CLI demo (real output on this machine).*
 
-
 **The node is up. The topic exists. `Publisher count: 1`. And no subscriber ever receives a byte.**
 
 That is one fault class with at least five causes, and every one of them looks like a dead camera, a frozen arm or a broken driver from the outside. `ddsdetective-ros2` is a zero-dependency Python tool that checks the environmental causes first, names the one it finds in plain words, and prints the exact fix. It was built on a ROS 2 Jazzy rig running under WSL2, where each of these cost a lab day before it was understood, and it works on plain Linux too.
@@ -19,9 +18,9 @@ env-split      FAIL    DDS domain split: 2 running ROS process groups cannot see
                        fix: export ROS_DOMAIN_ID=0 RMW_IMPLEMENTATION=rmw_fastrtps_cpp ...
                          3 proc(s): domain 0, rmw rmw_fastrtps_cpp, transports SHM, ...
                              pid 41210  move_group
-                             pid 41377  srl_gui
+                             pid 41377  robot_gui
                          2 proc(s): domain 7, rmw rmw_fastrtps_cpp, transports SHM, ...
-                             pid 43008  kortex_highlevel_bridge
+                             pid 43008  arm_driver
 daemon         FAIL    stale ros2 daemon: it hung while --no-daemon sees 28 node(s)
                        fix: ros2 daemon stop && ros2 daemon start
 wsl/network    WARN    networkingMode is nat (NAT, per wslinfo): UDP realtime channels break; TCP looks fine
@@ -146,12 +145,6 @@ These are the rules the tool follows, each learned the expensive way:
 - **Never `pkill` broad patterns while a stack you want is running.** Kill explicit PIDs, and prefer SIGINT: SIGKILL is how the segments got orphaned in the first place, and on some hardware (a Kinova arm permits exactly one API session) SIGKILL leaks the session as well.
 - **Re-measure a claim before preserving a workaround for it.** "Domain 0 is polluted" was true for one afternoon and enforced for weeks. A comment asserting an environment fact is a claim with a date.
 - **A check that cannot pass is worse than no check.** Prove a new probe against a known-good system before trusting a negative from it.
-
-## Origin
-
-Built during an MSc project at Imperial College London: a wearable dual-arm supernumerary-limb rig with two Kinova Gen3 arms, teleoperated from an instrumented master mannequin and from a Quest headset, running ROS 2 Jazzy under WSL2. Every number above was measured on that machine. The project repository is [Multimodal control of a wearable dual-arm robotic system for assisted object manipulation](https://github.com/megazron/Multimodal-control-of-a-wearable-dual-arm-robotic-system-for-assisted-object-manipulation).
-
-Companion toolkits from the same project: `camscout-usbip`, `shortstop-sim2real`, `twin-truth`, `smoothoperator-teleop`.
 
 ## Figures
 

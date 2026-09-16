@@ -10,8 +10,8 @@ def test_domain_split_is_a_fail_and_names_the_majority(fake_env):
     proc, _ = fake_env
     base = {"RMW_IMPLEMENTATION": "rmw_fastrtps_cpp", "FASTDDS_BUILTIN_TRANSPORTS": "SHM"}
     make_proc(proc, 10, "/opt/ros/jazzy/lib/moveit_ros_move_group/move_group", {**base, "ROS_DOMAIN_ID": "0"})
-    make_proc(proc, 11, "python3 -m srl_teleop.srl_gui --ros-args", {**base, "ROS_DOMAIN_ID": "0"})
-    make_proc(proc, 12, "python3 -m srl_teleop.kortex_highlevel_bridge --ros-args", {**base, "ROS_DOMAIN_ID": "7"})
+    make_proc(proc, 11, "python3 -m teleop_pkg.robot_gui --ros-args", {**base, "ROS_DOMAIN_ID": "0"})
+    make_proc(proc, 12, "python3 -m teleop_pkg.arm_driver --ros-args", {**base, "ROS_DOMAIN_ID": "7"})
     f = env_split.check(proc_root=proc, shell_env=SHELL)
     assert f.status == Status.FAIL
     assert "domain split" in f.finding

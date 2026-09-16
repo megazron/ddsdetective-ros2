@@ -136,13 +136,13 @@ def domain_split():
     # bus 7
     s.rect(60, 110, 360, 150, fill=ACCENT_BG, stroke=ACCENT, sw=2)
     s.text(80, 138, "ROS_DOMAIN_ID = 7", size=15, weight="700", fill=ACCENT, mono=True)
-    for i, n in enumerate(["kortex_highlevel_bridge_left", "kortex_highlevel_bridge_right"]):
+    for i, n in enumerate(["arm_driver_left", "arm_driver_right"]):
         s.text(80, 170 + i * 26, "• " + n, size=13, mono=True)
     s.text(80, 240, "the arm bridges", size=12, fill=MUTE, italic=True)
     # bus 0
     s.rect(580, 110, 360, 150, fill="#eef1f4", stroke=MUTE, sw=2)
     s.text(600, 138, "ROS_DOMAIN_ID = 0", size=15, weight="700", fill=INK, mono=True)
-    for i, n in enumerate(["srl_gui", "move_group", "ros2_control_node"]):
+    for i, n in enumerate(["robot_gui", "move_group", "ros2_control_node"]):
         s.text(600, 170 + i * 26, "• " + n, size=13, mono=True)
     s.text(600, 248, "the window, the sim", size=12, fill=MUTE, italic=True)
     # gap

@@ -6,12 +6,12 @@
 <text x="30" y="83" font-size="14" fill="#6b7580" text-anchor="start" font-weight="400">Nothing errors.</text>
 <rect x="60" y="110" width="360" height="150" rx="8" fill="#e3f2f4" stroke="#0b7285" stroke-width="2"/>
 <text x="80" y="138" font-size="15" fill="#0b7285" text-anchor="start" font-weight="700" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">ROS_DOMAIN_ID = 7</text>
-<text x="80" y="170" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• kortex_highlevel_bridge_left</text>
-<text x="80" y="196" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• kortex_highlevel_bridge_right</text>
+<text x="80" y="170" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• arm_driver_left</text>
+<text x="80" y="196" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• arm_driver_right</text>
 <text x="80" y="240" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400" font-style="italic">the arm bridges</text>
 <rect x="580" y="110" width="360" height="150" rx="8" fill="#eef1f4" stroke="#6b7580" stroke-width="2"/>
 <text x="600" y="138" font-size="15" fill="#1f2933" text-anchor="start" font-weight="700" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">ROS_DOMAIN_ID = 0</text>
-<text x="600" y="170" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• srl_gui</text>
+<text x="600" y="170" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• robot_gui</text>
 <text x="600" y="196" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• move_group</text>
 <text x="600" y="222" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• ros2_control_node</text>
 <text x="600" y="248" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400" font-style="italic">the window, the sim</text>
