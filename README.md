@@ -2,7 +2,7 @@
 
 ![demo](docs/img/demo.gif)
 
-*Live CLI demo (real output on this machine).*
+*Four commands of the CLI.*
 
 **The node is up. The topic exists. `Publisher count: 1`. And no subscriber ever receives a byte.**
 
