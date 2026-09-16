@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<rect width="1000" height="560" fill="#ffffff"/>
+<defs><marker id="arw" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 z" fill="#6b7580"/></marker></defs>
+<text x="30" y="40" font-size="24" fill="#1f2933" text-anchor="start" font-weight="700">One symptom, six causes</text>
+<text x="30" y="66" font-size="14" fill="#6b7580" text-anchor="start" font-weight="400">The publisher is up, the topic is listed, Publisher count is 1 -- and the subscriber receives</text>
+<text x="30" y="83" font-size="14" fill="#6b7580" text-anchor="start" font-weight="400">nothing.</text>
+<rect x="340" y="96" width="320" height="70" rx="8" fill="#fbe9eb" stroke="#b02a37" stroke-width="2"/>
+<text x="500" y="124" font-size="15" fill="#b02a37" text-anchor="middle" font-weight="700">topic flows, nobody receives</text>
+<text x="500" y="146" font-size="12" fill="#b02a37" text-anchor="middle" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">Publisher count: 1   subscriber: 0 bytes</text>
+<line x1="500" y1="166" x2="180.0" y2="210" stroke="#c3cbd3" stroke-width="1.2"/>
+<rect x="30" y="210" width="300" height="100" rx="8" fill="#ffffff" stroke="#2b8a3e" stroke-width="2"/>
+<text x="44" y="236" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">orphaned /dev/shm segments</text>
+<text x="318" y="236" font-size="11" fill="#2b8a3e" text-anchor="end" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">shm</text>
+<text x="44" y="258" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">a killed process leaks its FastDDS</text>
+<text x="44" y="273" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">segment; discovery wades through the pile</text>
+<line x1="500" y1="166" x2="500.0" y2="210" stroke="#c3cbd3" stroke-width="1.2"/>
+<rect x="350" y="210" width="300" height="100" rx="8" fill="#ffffff" stroke="#2b8a3e" stroke-width="2"/>
+<text x="364" y="236" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">domain / transport split</text>
+<text x="638" y="236" font-size="11" fill="#2b8a3e" text-anchor="end" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">env-split</text>
+<text x="364" y="258" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">two process groups on different</text>
+<text x="364" y="273" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">ROS_DOMAIN_ID or RMW never see each other</text>
+<line x1="500" y1="166" x2="820.0" y2="210" stroke="#c3cbd3" stroke-width="1.2"/>
+<rect x="670" y="210" width="300" height="100" rx="8" fill="#ffffff" stroke="#2b8a3e" stroke-width="2"/>
+<text x="684" y="236" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">hung ros2 daemon</text>
+<text x="958" y="236" font-size="11" fill="#2b8a3e" text-anchor="end" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">daemon</text>
+<text x="684" y="258" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">caches stale graph state and hangs;</text>
+<text x="684" y="273" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">--no-daemon still sees every node</text>
+<line x1="500" y1="166" x2="180.0" y2="330" stroke="#c3cbd3" stroke-width="1.2"/>
+<rect x="30" y="330" width="300" height="100" rx="8" fill="#ffffff" stroke="#2b8a3e" stroke-width="2"/>
+<text x="44" y="356" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">RELIABLE vs BEST_EFFORT</text>
+<text x="318" y="356" font-size="11" fill="#2b8a3e" text-anchor="end" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">qos</text>
+<text x="44" y="378" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">DDS delivers nothing and warns once; ros2</text>
+<text x="44" y="393" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">topic hz gets zero</text>
+<line x1="500" y1="166" x2="500.0" y2="330" stroke="#c3cbd3" stroke-width="1.2"/>
+<rect x="350" y="330" width="300" height="100" rx="8" fill="#ffffff" stroke="#b25a00" stroke-width="2"/>
+<text x="364" y="356" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">NAT breaks UDP realtime</text>
+<text x="638" y="356" font-size="11" fill="#b25a00" text-anchor="end" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">wsl/network</text>
+<text x="364" y="378" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">TCP and ping are perfect; the UDP cyclic</text>
+<text x="364" y="393" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">channel times out</text>
+<line x1="500" y1="166" x2="820.0" y2="330" stroke="#c3cbd3" stroke-width="1.2"/>
+<rect x="670" y="330" width="300" height="100" rx="8" fill="#ffffff" stroke="#b25a00" stroke-width="2"/>
+<text x="684" y="356" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">modules not loaded</text>
+<text x="958" y="356" font-size="11" fill="#b25a00" text-anchor="end" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">wsl/usb</text>
+<text x="684" y="378" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">usbipd says Attached while Linux has no</text>
+<text x="684" y="393" font-size="11.5" fill="#6b7580" text-anchor="start" font-weight="400">/dev/video*</text>
+<text x="30" y="548" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400" font-style="italic">The doctor checks each one and names the fix; the two amber rows are WSL-only.</text>
+</svg>

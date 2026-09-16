@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<rect width="1000" height="500" fill="#ffffff"/>
+<defs><marker id="arw" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 z" fill="#6b7580"/></marker></defs>
+<text x="30" y="40" font-size="24" fill="#1f2933" text-anchor="start" font-weight="700">A DDS domain split</text>
+<text x="30" y="66" font-size="14" fill="#6b7580" text-anchor="start" font-weight="400">Two groups of processes on different ROS_DOMAIN_ID are two graphs that cannot see each other.</text>
+<text x="30" y="83" font-size="14" fill="#6b7580" text-anchor="start" font-weight="400">Nothing errors.</text>
+<rect x="60" y="110" width="360" height="150" rx="8" fill="#e3f2f4" stroke="#0b7285" stroke-width="2"/>
+<text x="80" y="138" font-size="15" fill="#0b7285" text-anchor="start" font-weight="700" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">ROS_DOMAIN_ID = 7</text>
+<text x="80" y="170" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• kortex_highlevel_bridge_left</text>
+<text x="80" y="196" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• kortex_highlevel_bridge_right</text>
+<text x="80" y="240" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400" font-style="italic">the arm bridges</text>
+<rect x="580" y="110" width="360" height="150" rx="8" fill="#eef1f4" stroke="#6b7580" stroke-width="2"/>
+<text x="600" y="138" font-size="15" fill="#1f2933" text-anchor="start" font-weight="700" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">ROS_DOMAIN_ID = 0</text>
+<text x="600" y="170" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• srl_gui</text>
+<text x="600" y="196" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• move_group</text>
+<text x="600" y="222" font-size="13" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">• ros2_control_node</text>
+<text x="600" y="248" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400" font-style="italic">the window, the sim</text>
+<line x1="430" y1="185" x2="570" y2="185" stroke="#b02a37" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="500" y="176" font-size="13" fill="#b02a37" text-anchor="middle" font-weight="700">no</text>
+<text x="500" y="205" font-size="12" fill="#b02a37" text-anchor="middle" font-weight="400">discovery</text>
+<rect x="60" y="300" width="880" height="96" rx="8" fill="#ffffff" stroke="#c3cbd3" stroke-width="1.5"/>
+<text x="80" y="328" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">how the doctor finds it</text>
+<text x="80" y="354" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">diff ROS_DOMAIN_ID / RMW_IMPLEMENTATION / FASTDDS_BUILTIN_TRANSPORTS across /proc/&lt;pid&gt;/environ of every ROS process</text>
+<text x="80" y="378" font-size="12.5" fill="#0b7285" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">fix: export ROS_DOMAIN_ID=&lt;the majority group&gt; in the stranded shell</text>
+<text x="60" y="430" font-size="13" fill="#6b7580" text-anchor="start" font-weight="400">On the rig this stranded the arm bridges for weeks. The workaround that pinned them to domain 7 was justified</text>
+<text x="60" y="447" font-size="13" fill="#6b7580" text-anchor="start" font-weight="400">by a comment claiming domain 0 was 'polluted' -- re-measured, both domains delivered 27 of 27. Re-measure a</text>
+<text x="60" y="464" font-size="13" fill="#6b7580" text-anchor="start" font-weight="400">claim before preserving a workaround for it.</text>
+</svg>

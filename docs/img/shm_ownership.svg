@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<rect width="1000" height="540" fill="#ffffff"/>
+<defs><marker id="arw" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 z" fill="#6b7580"/></marker></defs>
+<text x="30" y="40" font-size="23" fill="#1f2933" text-anchor="start" font-weight="700">When is a shared-memory segment safe to delete</text>
+<rect x="60" y="90" width="520" height="70" rx="8" fill="#e3f2f4" stroke="#0b7285" stroke-width="2"/>
+<text x="80" y="118" font-size="15" fill="#1f2933" text-anchor="start" font-weight="700">a file in /dev/shm</text>
+<text x="80" y="140" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400">name matches fastrtps* / fastdds* / sem.fastrtps*</text>
+<line x1="320" y1="160" x2="320" y2="180" stroke="#6b7580" stroke-width="1.6" marker-end="url(#arw)"/>
+<text x="335" y="176" font-size="11" fill="#6b7580" text-anchor="start" font-weight="400">yes, and</text>
+<rect x="60" y="180" width="520" height="70" rx="8" fill="#e3f2f4" stroke="#0b7285" stroke-width="2"/>
+<text x="80" y="208" font-size="15" fill="#1f2933" text-anchor="start" font-weight="700">referenced by a live process?</text>
+<text x="80" y="230" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400">checked in BOTH /proc/&lt;pid&gt;/fd and /proc/&lt;pid&gt;/maps -- FastDDS</text>
+<text x="80" y="245" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400">mmaps and may close the fd</text>
+<line x1="320" y1="250" x2="320" y2="270" stroke="#6b7580" stroke-width="1.6" marker-end="url(#arw)"/>
+<text x="335" y="266" font-size="11" fill="#6b7580" text-anchor="start" font-weight="400">yes, and</text>
+<rect x="60" y="270" width="520" height="70" rx="8" fill="#e3f2f4" stroke="#0b7285" stroke-width="2"/>
+<text x="80" y="298" font-size="15" fill="#1f2933" text-anchor="start" font-weight="700">older than the age floor?</text>
+<text x="80" y="320" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400">default 20 s; a process still starting has segments it has not</text>
+<text x="80" y="335" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400">mapped yet</text>
+<line x1="320" y1="340" x2="320" y2="360" stroke="#6b7580" stroke-width="1.6" marker-end="url(#arw)"/>
+<text x="335" y="356" font-size="11" fill="#6b7580" text-anchor="start" font-weight="400">yes, and</text>
+<rect x="60" y="360" width="520" height="70" rx="8" fill="#e8f5ec" stroke="#2b8a3e" stroke-width="2"/>
+<text x="80" y="388" font-size="15" fill="#2b8a3e" text-anchor="start" font-weight="700">ORPHAN -- safe to delete</text>
+<text x="80" y="410" font-size="12" fill="#6b7580" text-anchor="start" font-weight="400">with --fix; already-running nodes are untouched</text>
+<rect x="620" y="90" width="340" height="330" rx="8" fill="#fbe9eb" stroke="#b02a37" stroke-width="2"/>
+<text x="640" y="118" font-size="15" fill="#b02a37" text-anchor="start" font-weight="700">two traps this avoids</text>
+<text x="640" y="148" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">1. rm -f /dev/shm/fastrtps_* deletes the</text>
+<text x="640" y="165" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">running ros2 daemon's own segments too. It</text>
+<text x="640" y="182" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">does not die -- it goes DEAF, and every</text>
+<text x="640" y="199" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">node list returns nothing against a</text>
+<text x="640" y="216" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">healthy stack.</text>
+<text x="640" y="250" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">2. Sweeping while a stack is starting</text>
+<text x="640" y="267" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">destroys a process whose segments are not</text>
+<text x="640" y="284" font-size="12.5" fill="#1f2933" text-anchor="start" font-weight="400">mapped yet. Hence the age floor.</text>
+<text x="640" y="350" font-size="12" fill="#b02a37" text-anchor="start" font-weight="400" font-family="'Cascadia Code','Consolas','DejaVu Sans Mono',monospace">order: stop daemon -&gt; sweep -&gt; start daemon</text>
+<text x="60" y="470" font-size="13" fill="#6b7580" text-anchor="start" font-weight="400">Measured on the rig: 116 segments, 37 live, 79 orphaned; a fresh pub/sub still exchanged 27 of 27 messages while ros2</text>
+<text x="60" y="487" font-size="13" fill="#6b7580" text-anchor="start" font-weight="400">topic list timed out at 25 s, because the pair only had to find each other, not the polluted graph.</text>
+</svg>
