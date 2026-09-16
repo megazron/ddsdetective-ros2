@@ -1,5 +1,10 @@
 # DDSDetective
 
+![demo](docs/img/demo.gif)
+
+*Live CLI demo (real output on this machine).*
+
+
 **The node is up. The topic exists. `Publisher count: 1`. And no subscriber ever receives a byte.**
 
 That is one fault class with at least five causes, and every one of them looks like a dead camera, a frozen arm or a broken driver from the outside. `ddsdetective-ros2` is a zero-dependency Python tool that checks the environmental causes first, names the one it finds in plain words, and prints the exact fix. It was built on a ROS 2 Jazzy rig running under WSL2, where each of these cost a lab day before it was understood, and it works on plain Linux too.
