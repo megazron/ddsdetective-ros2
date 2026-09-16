@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ros2-wsl-doctor"
+version = "0.1.0"
+description = "Doctor for the ROS 2 / FastDDS 'silent delivery' fault class: stale shared memory, DDS domain splits, stale ros2 daemons and WSL2 traps."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Gaus Mohiuddin Sayyad", email = "maintainer@example.com"}]
+keywords = ["ros2", "fastdds", "wsl2", "dds", "diagnostics", "robotics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/megazron/ros2-wsl-doctor"
+
+[project.scripts]
+ros2-wsl-doctor = "ros2_wsl_doctor.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
