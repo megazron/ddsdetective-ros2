@@ -1,15 +1,15 @@
-# ros2-wsl-doctor
+# DDSDetective
 
 **The node is up. The topic exists. `Publisher count: 1`. And no subscriber ever receives a byte.**
 
-That is one fault class with at least five causes, and every one of them looks like a dead camera, a frozen arm or a broken driver from the outside. `ros2-wsl-doctor` is a zero-dependency Python tool that checks the environmental causes first, names the one it finds in plain words, and prints the exact fix. It was built on a ROS 2 Jazzy rig running under WSL2, where each of these cost a lab day before it was understood, and it works on plain Linux too.
+That is one fault class with at least five causes, and every one of them looks like a dead camera, a frozen arm or a broken driver from the outside. `ddsdetective-ros2` is a zero-dependency Python tool that checks the environmental causes first, names the one it finds in plain words, and prints the exact fix. It was built on a ROS 2 Jazzy rig running under WSL2, where each of these cost a lab day before it was understood, and it works on plain Linux too.
 
 ```
-$ ros2-wsl-doctor
+$ ddsdetective-ros2
 CHECK          STATUS  FINDING
 ------------------------------------------------------------
 shm            FAIL    79 orphaned FastDDS segment(s) in /dev/shm; new participants must wade through them
-                       fix: ros2-wsl-doctor shm --fix   (deletes only the orphans; ...)
+                       fix: ddsdetective-ros2 shm --fix   (deletes only the orphans; ...)
 env-split      FAIL    DDS domain split: 2 running ROS process groups cannot see each other
                        fix: export ROS_DOMAIN_ID=0 RMW_IMPLEMENTATION=rmw_fastrtps_cpp ...
                          3 proc(s): domain 0, rmw rmw_fastrtps_cpp, transports SHM, ...
@@ -32,7 +32,7 @@ The symptom is always the same: a node at 20-30 % CPU, a topic listed, a blank p
 4. **A QoS mismatch.** Camera topics publish BEST_EFFORT (`qos_profile_sensor_data`). A plain `create_subscription(...)` or `ros2 topic hz` is RELIABLE by default and receives nothing. DDS does warn, once, in a line that is easy to miss: `incompatible QoS ... Last incompatible policy: RELIABILITY`. A healthy scene camera was declared dead this way.
 5. **The fix that recreates the fault.** The obvious repair, `rm -f /dev/shm/fastrtps_*`, also deletes the running `ros2` daemon's own segments. The daemon does not die; it goes **deaf**. `ros2 node list` then returns nothing against a healthy stack, and the next preflight blamed the simulation: false, specific and confident, which is the worst combination because it sends you to the wrong log. A blind sweep also destroyed a *starting* simulation once, because a process that is still coming up has segments it has not mapped yet.
 
-The other two members of the class, a V4L2 device opened twice and an RTSP camera whose module is wedged while the arm still pings, are hardware-side and live in the companion `usbip-camera-doctor`.
+The other two members of the class, a V4L2 device opened twice and an RTSP camera whose module is wedged while the arm still pings, are hardware-side and live in the companion `camscout-usbip`.
 
 ![silent delivery](docs/img/silent_delivery.svg)
 
@@ -50,7 +50,7 @@ The other two members of the class, a V4L2 device opened twice and an RTSP camer
 
 | check | what it looks at | FAIL / WARN when | the fix it prints |
 |---|---|---|---|
-| `shm` | every `fastrtps*` / `fastdds*` / `sem.fastrtps_*` object in `/dev/shm`, against every live process's `/proc/<pid>/fd` **and** `/proc/<pid>/maps`, with a 20 s age floor | a segment is unreferenced by the kernel's own account and older than the floor | `ros2-wsl-doctor shm --fix` (deletes only those) |
+| `shm` | every `fastrtps*` / `fastdds*` / `sem.fastrtps_*` object in `/dev/shm`, against every live process's `/proc/<pid>/fd` **and** `/proc/<pid>/maps`, with a 20 s age floor | a segment is unreferenced by the kernel's own account and older than the floor | `ddsdetective-ros2 shm --fix` (deletes only those) |
 | `env-split` | `ROS_DOMAIN_ID`, `RMW_IMPLEMENTATION`, `FASTDDS_BUILTIN_TRANSPORTS`, `ROS_LOCALHOST_ONLY`, `ROS_AUTOMATIC_DISCOVERY_RANGE` read from each running ROS process's `/proc/<pid>/environ`, plus this shell | more than one group; or this shell differs from the stack; or `ROS_LOCALHOST_ONLY` is set anywhere | the majority group's exports |
 | `daemon` | `ros2 node list` under an 8 s timeout against `ros2 node list --no-daemon` | the daemon hangs or returns nothing while `--no-daemon` sees nodes | `ros2 daemon stop && ros2 daemon start` |
 | `wsl` | `wslinfo --networking-mode` (falling back to `.wslconfig`), `vhci_hcd` and `uvcvideo` in `/proc/modules`, `/mnt/c` readability, the shell's transport, and a clock note | NAT; modules missing; `/mnt/c` returns EIO | `.wslconfig` mirrored + `wsl --shutdown`; `modprobe`; `wsl --shutdown` |
@@ -70,7 +70,7 @@ Checks that need the `ros2` CLI report `SKIP` when it is not on `PATH`, never a 
 ## Install
 
 ```bash
-pip install git+https://github.com/megazron/ros2-wsl-doctor
+pip install git+https://github.com/megazron/ddsdetective-ros2
 ```
 
 Python 3.10 or newer, no third-party dependencies. It never imports `rclpy`; anything that needs the graph shells out to the `ros2` CLI under a timeout, so it runs from any shell, sourced or not.
@@ -78,23 +78,23 @@ Python 3.10 or newer, no third-party dependencies. It never imports `rclpy`; any
 ## Quickstart
 
 ```bash
-ros2-wsl-doctor                         # every check, plain-text table, exit 1 on any FAIL
-ros2-wsl-doctor --json                  # the same as JSON, for scripts and CI
-ros2-wsl-doctor shm                     # report orphaned segments
-ros2-wsl-doctor shm --fix               # delete only the orphans, leave everything a live process maps
-ros2-wsl-doctor shm --fix --restart-daemon   # also cycle a running ros2 daemon so its stale segments go too
-ros2-wsl-doctor env-split               # who is on which domain / transport, and is this shell with them
-ros2-wsl-doctor env-split --match my_   # count extra processes as ROS by regex on their cmdline
-ros2-wsl-doctor daemon                  # daemon versus --no-daemon
-ros2-wsl-doctor wsl                     # NAT, USB modules, /mnt/c, transports, clock
-ros2-wsl-doctor delivery --domain 7 --expected 20   # prove delivery on a domain
-ros2-wsl-doctor qos /scene_camera/image_raw          # the reliability trap
+ddsdetective-ros2                         # every check, plain-text table, exit 1 on any FAIL
+ddsdetective-ros2 --json                  # the same as JSON, for scripts and CI
+ddsdetective-ros2 shm                     # report orphaned segments
+ddsdetective-ros2 shm --fix               # delete only the orphans, leave everything a live process maps
+ddsdetective-ros2 shm --fix --restart-daemon   # also cycle a running ros2 daemon so its stale segments go too
+ddsdetective-ros2 env-split               # who is on which domain / transport, and is this shell with them
+ddsdetective-ros2 env-split --match my_   # count extra processes as ROS by regex on their cmdline
+ddsdetective-ros2 daemon                  # daemon versus --no-daemon
+ddsdetective-ros2 wsl                     # NAT, USB modules, /mnt/c, transports, clock
+ddsdetective-ros2 delivery --domain 7 --expected 20   # prove delivery on a domain
+ddsdetective-ros2 qos /scene_camera/image_raw          # the reliability trap
 ```
 
 A good habit on a machine like the one this came from: run it first, before blaming the code.
 
 ```bash
-ros2-wsl-doctor --quiet || echo "fix the environment before debugging the stack"
+ddsdetective-ros2 --quiet || echo "fix the environment before debugging the stack"
 ```
 
 ## Reading the output
@@ -146,7 +146,7 @@ These are the rules the tool follows, each learned the expensive way:
 
 Built during an MSc project at Imperial College London: a wearable dual-arm supernumerary-limb rig with two Kinova Gen3 arms, teleoperated from an instrumented master mannequin and from a Quest headset, running ROS 2 Jazzy under WSL2. Every number above was measured on that machine. The project repository is [Multimodal control of a wearable dual-arm robotic system for assisted object manipulation](https://github.com/megazron/Multimodal-control-of-a-wearable-dual-arm-robotic-system-for-assisted-object-manipulation).
 
-Companion toolkits from the same project: `usbip-camera-doctor`, `sim2real-gap-kit`, `twin-truth`, `teleop-signal-kit`.
+Companion toolkits from the same project: `camscout-usbip`, `shortstop-sim2real`, `twin-truth`, `smoothoperator-teleop`.
 
 ## Figures
 

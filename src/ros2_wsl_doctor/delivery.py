@@ -80,7 +80,7 @@ def delivery_test(domain: int | None = None, expected: int = 10, rate_hz: float 
         return Finding("delivery", Status.FAIL,
                        "domain %s delivered 0/%d in %.0f s: pub/sub on this host cannot see each "
                        "other" % (dom, expected, el),
-                       fix="ros2-wsl-doctor shm; ros2-wsl-doctor env-split; check "
+                       fix="ddsdetective-ros2 shm; ddsdetective-ros2 env-split; check "
                            "FASTDDS_BUILTIN_TRANSPORTS matches everywhere")
     return Finding("delivery", Status.WARN, "domain %s delivered %d/%d in %.0f s (partial)"
                    % (dom, got, expected, el))
@@ -119,7 +119,7 @@ def qos_check(topic: str, runner=None) -> Finding:
     text = runner(["ros2", "topic", "info", "-v", topic])
     if not text.strip():
         return Finding("qos", Status.FAIL, "no answer for %s (topic absent or discovery wedged)"
-                       % topic, fix="ros2-wsl-doctor daemon; ros2-wsl-doctor shm")
+                       % topic, fix="ddsdetective-ros2 daemon; ddsdetective-ros2 shm")
     info = parse_topic_info(text)
     pubs = info["publishers"]
     subs = info["subscribers"]

@@ -13,4 +13,4 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e . pytest
       - run: python -m pytest -q
-      - run: ros2-wsl-doctor --json || true
+      - run: ddsdetective-ros2 --json || true

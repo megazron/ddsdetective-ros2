@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the figures in docs/img/ for ros2-wsl-doctor.
+"""Regenerate the figures in docs/img/ for ddsdetective-ros2.
 
     python3 docs/make_figures.py
 
@@ -233,7 +233,7 @@ def doctor_output():
     ax.axis("off")
     fig.patch.set_facecolor("#0d1420")
     ax.set_facecolor("#0d1420")
-    ax.text(0.015, len(lines) + 0.4, "$ ros2-wsl-doctor", family="monospace",
+    ax.text(0.015, len(lines) + 0.4, "$ ddsdetective-ros2", family="monospace",
             fontsize=12, color="#8dd5e0", weight="bold")
     for i, ln in enumerate(lines):
         y = len(lines) - i - 0.2

@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ros2-wsl-doctor"
+name = "ddsdetective-ros2"
 version = "0.1.0"
 description = "Doctor for the ROS 2 / FastDDS 'silent delivery' fault class: stale shared memory, DDS domain splits, stale ros2 daemons and WSL2 traps."
 readme = "README.md"
@@ -20,10 +20,10 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/megazron/ros2-wsl-doctor"
+Homepage = "https://github.com/megazron/ddsdetective-ros2"
 
 [project.scripts]
-ros2-wsl-doctor = "ros2_wsl_doctor.cli:main"
+ddsdetective-ros2 = "ros2_wsl_doctor.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

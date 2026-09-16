@@ -1,4 +1,4 @@
-"""ros2-wsl-doctor: find out why a ROS 2 topic publishes and nothing arrives.
+"""ddsdetective-ros2: find out why a ROS 2 topic publishes and nothing arrives.
 
 The fault class this covers: the node is up, the topic exists, and no
 subscriber ever receives a byte. On FastDDS under WSL2 (and plain Linux) the

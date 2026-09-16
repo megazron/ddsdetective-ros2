@@ -1,12 +1,12 @@
-"""ros2-wsl-doctor command line.
+"""ddsdetective-ros2 command line.
 
-    ros2-wsl-doctor                 # every check
-    ros2-wsl-doctor shm [--fix] [--restart-daemon]
-    ros2-wsl-doctor env-split [--match REGEX]
-    ros2-wsl-doctor daemon
-    ros2-wsl-doctor wsl
-    ros2-wsl-doctor delivery [--domain N] [--expected 10]
-    ros2-wsl-doctor qos TOPIC
+    ddsdetective-ros2                 # every check
+    ddsdetective-ros2 shm [--fix] [--restart-daemon]
+    ddsdetective-ros2 env-split [--match REGEX]
+    ddsdetective-ros2 daemon
+    ddsdetective-ros2 wsl
+    ddsdetective-ros2 delivery [--domain N] [--expected 10]
+    ddsdetective-ros2 qos TOPIC
     add --json to any of them for machine-readable output
 """
 from __future__ import annotations
@@ -32,7 +32,7 @@ def run_all(args) -> list[Finding]:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="ros2-wsl-doctor", description=__doc__,
+    p = argparse.ArgumentParser(prog="ddsdetective-ros2", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--json", action="store_true", help="machine-readable output")
     p.add_argument("--quiet", action="store_true", help="hide detail lines")

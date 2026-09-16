@@ -60,7 +60,7 @@ def check(daemon_timeout: float = 8.0, nodaemon_timeout: float = 25.0,
     if d_to and t_to:
         return Finding("daemon", Status.FAIL,
                        "both the daemon and --no-daemon hung: discovery itself is wedged",
-                       fix="ros2-wsl-doctor shm; then check env-split; then "
+                       fix="ddsdetective-ros2 shm; then check env-split; then "
                            "FASTDDS_BUILTIN_TRANSPORTS", details=details)
     if not n_d and not n_t:
         return Finding("daemon", Status.PASS, "no nodes running (daemon and --no-daemon agree)",

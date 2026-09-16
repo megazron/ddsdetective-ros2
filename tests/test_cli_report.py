@@ -37,4 +37,4 @@ def test_cli_help(capsys):
         cli.main(["--help"])
     except SystemExit as e:
         assert e.code == 0
-    assert "ros2-wsl-doctor" in capsys.readouterr().out
+    assert "ddsdetective-ros2" in capsys.readouterr().out

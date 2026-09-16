@@ -200,7 +200,7 @@ def check(fix: bool = False, restart: bool = False, shm_root: str = "/dev/shm",
             "shm", Status.FAIL,
             "%d orphaned FastDDS segment(s) in %s; new participants must wade through them"
             % (len(s.orphaned), shm_root),
-            fix="ros2-wsl-doctor shm --fix   (deletes only the orphans; add --restart-daemon "
+            fix="ddsdetective-ros2 shm --fix   (deletes only the orphans; add --restart-daemon "
                 "if a ros2 daemon is running)",
             details=details + ["  " + n for n in s.orphaned[:8]]
             + (["  ... and %d more" % (len(s.orphaned) - 8)] if len(s.orphaned) > 8 else [])

@@ -25,7 +25,7 @@ KEYS = ("ROS_DOMAIN_ID", "RMW_IMPLEMENTATION", "FASTDDS_BUILTIN_TRANSPORTS",
 DEFAULT_MATCH = re.compile(
     r"ros2|--ros-args|rclpy|rclcpp|rmw|/opt/ros/|install/|move_group|controller_manager|"
     r"robot_state_publisher|ros2_control_node|rviz|gazebo|gz sim|ign gazebo", re.I)
-SELF_MATCH = re.compile(r"ros2_wsl_doctor|ros2-wsl-doctor")
+SELF_MATCH = re.compile(r"ros2_wsl_doctor|ddsdetective-ros2")
 # The ros2 CLI starts one daemon PER DOMAIN it has been asked about, so two
 # daemons on two domains are not a split; they are reported separately.
 DAEMON_MATCH = re.compile(r"ros2cli\.daemon")
