@@ -9,7 +9,7 @@ description = "Doctor for the ROS 2 / FastDDS 'silent delivery' fault class: sta
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [{name = "Gaus Mohiuddin Sayyad", email = "maintainer@example.com"}]
+authors = [{name = "Gaus Mohiuddin Sayyad"}]
 keywords = ["ros2", "fastdds", "wsl2", "dds", "diagnostics", "robotics"]
 classifiers = [
   "Programming Language :: Python :: 3",
